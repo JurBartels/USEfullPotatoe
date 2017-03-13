@@ -1,0 +1,11 @@
+// include externe css/scss files zoals bootstrap
+@import "scss/includes/bootstrap";
+
+// include variables
+@import "scss/colors";
+
+// include styles
+@import "scss/fontfaces";
+@import "scss/bulk";
+@import "scss/reusables";
+@import "scss/overwrites";
