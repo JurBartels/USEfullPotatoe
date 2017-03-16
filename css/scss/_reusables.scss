@@ -1,4 +1,4 @@
- .card {
+.card {
 	transition: box-shadow 0.1s linear; 
 	height: 100%;
 	width: 100%;
@@ -6,25 +6,49 @@
 	background-color: white;
 	box-shadow: 5px 5px 15px 0px rgba(184,184,184,0.75);
 	border-radius: 3px;
-}
 
-.card:hover {
-	box-shadow: 7px 7px 15px 5px rgba(184,184,184,1);
+	&:hover {
+		box-shadow: 7px 7px 15px 5px rgba(184,184,184,1);
+	}
 }
 
 .group {
 	border-bottom: 1px solid #aaaaaa;
 	padding-bottom: 15px;
 	margin-bottom: 15px;
+
+	.inputBox {
+		border: 1px solid #dfdfdf;
+		border-radius: 5px;
+		width: 450px;
+
+		label {
+			width: 100%;
+			border-bottom: 1px solid #dfdfdf;
+			margin: 5px 5px 0px 0px;
+			padding: 10px;
+			font-size: 16px;
+			font-weight: 100;
+		}
+
+		input {
+			width: 98%;
+			height: 35px;
+			border: none;
+			margin: 5px;
+			font-size: 22px;
+			padding: 3px;
+		}
+	}
 }
 
 .btn {
 	transition: all 0.1s linear;
 	border: 2px solid $go-button;
 	color: $go-button;
-}
 
-.btn:hover {
-	background-color: $go-button;
-	color: white;
+	&:hover {
+		background-color: $go-button;
+		color: white;
+	}
 }
