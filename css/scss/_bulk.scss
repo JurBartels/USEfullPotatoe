@@ -1,1 +1,15 @@
- 
+html, body {
+	background-color: #efefef;
+	height: 100%;
+}
+
+#inputContainer, #outputContainer {
+	height: 100%;
+	width: 50%;
+	float: left;
+	padding: 75px;
+}
+
+input {
+	margin-bottom: 15px;
+}

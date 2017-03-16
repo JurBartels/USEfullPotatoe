@@ -23,19 +23,32 @@
 </head>
 
 <body>
-	<div id="inputs">
-		<input type="text">
-		<input type="text">
-		<input type="text">
-		<input type="text">
-		<input type="text">
-		<a href="#" class="btn" onclick="startModel()">Berekenen</a>
+	<div id="inputContainer">
+		<div class="card">
+			<div id="inputs">
+				<div class="group">
+					<label for="input1">input1</label>
+					<input id="input1" type="text">
+					<br>
+					<label for="input2">input2</label>
+					<input id="input2" type="text">
+				</div>
+				<input type="text">
+				<input type="text">
+				<input type="text">
+				<a href="#" class="btn" onclick="startModel()">Go</a>
+			</div>
+		</div>
 	</div>
 
-	<div id="outputs">
-		<span class="output-field">
-			
-		</span>
+	<div id="outputContainer">
+		<div class="card">
+			<div id="outputs">
+				<span class="output-field">
+					
+				</span>
+			</div>
+		</div>
 	</div>
 
 	<!-- scripts -->
