@@ -14,6 +14,11 @@ var square = {
 };
 
 $(document).ready(function () {
+    // TODO: start remove, only here for easy testing
+    initialize(10, 12, 6);  // To init everything for easy testing
+
+
+    // TODO: end remove
     cards = $('.card');
     inputContainer = $('#inputContainer');
     canvasShape = $('#canvasShape');
@@ -24,8 +29,8 @@ $(document).ready(function () {
         event.stopPropagation();
     });
     inputContainer.bind('transitionend', function () {
-        setCanvas(canvasShape, 10, 10); // For now a 10x10 grid
-        setCanvas(canvasValues, 10, 10); // For now a 10x10 grid
+        setCanvas(canvasShape, fields.length, fields[0].length);
+        setCanvas(canvasShape, fields.length, fields[0].length);
     });
 
 
