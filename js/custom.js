@@ -4,6 +4,8 @@ var fields = [];       // List of squares that the farmer has
 var isInit = false;     // True if the fields var is initialized
 var canvasShape = null;
 var canvasValues = null;
+var inputContainer = null;
+var cards = null;
 
 // Square is a piece of land
 var square = {
@@ -12,8 +14,19 @@ var square = {
 };
 
 $(document).ready(function () {
+    cards = $('.card');
+    inputContainer = $('#inputContainer');
     canvasShape = $('#canvasShape');
     canvasValues = $('#canvasValues');
+
+    // Prevent children updating width trigger
+    cards.bind('transitionend', function (event) {
+        event.stopPropagation();
+    });
+    inputContainer.bind('transitionend', function () {
+        setCanvas(canvasShape, 10, 10); // For now a 10x10 grid
+    });
+
 
     //handle the submit event for the input form
     $("#new_input").submit(function(event){
@@ -126,6 +139,29 @@ var getIsUsed = function (x, y) {
         throw new RangeError('x or y is bigger than the field')
     }
     return fields[x][y].used;
+};
+
+var setCanvas = function (canvas, x, y) {
+    if (typeof x != 'number' || typeof y != 'number') {
+        throw new TypeError("x or y isn't a number")
+    } else if (x < 1 || y < 1) {
+        throw new RangeError('x and y needs to be at least 1')
+    }
+    var width = inputContainer.width();
+    var height = inputContainer.height();
+    canvas[0].width = width - 71;  // card has twice 35px padding and 1 for the border
+    canvas[0].height = height - 116;  // card has twice 35px padding and 45 for the buttons and 1 for the border
+    var min = Math.min(canvas[0].width, canvas[0].height);
+    var context = canvas[0].getContext("2d");
+    var opts = {
+        distance : (min / x),
+        lineWidth : 1,
+        gridColor : "#000000",
+        caption : false,
+        horizontalLines : true,
+        verticalLines : true
+    };
+    new Grid(opts).draw(context);
 };
 
 function startModel() {
