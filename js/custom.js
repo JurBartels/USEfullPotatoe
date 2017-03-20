@@ -9,6 +9,16 @@ var square = {
     'nitrate': 0
 };
 
+var initialize = function (x, y, length) {
+    if (typeof x != 'number' || typeof y != 'number' || typeof length != 'number') {
+        throw new TypeError("x, y or length isn't a number");
+    } else if (x < 1 || y < 1 || length < 1) {
+        throw new RangeError('x, y and length cannot be less than 1')
+    }
+    setLengthSquares(length);
+    genField(x, y);
+    isInit = true;
+};
 
 var genField = function (x, y) {
     if (typeof x != 'number' || typeof y != 'number') {
@@ -20,7 +30,6 @@ var genField = function (x, y) {
             fields[i][j] = square;
         }
     }
-    isInit = true;
 };
 
 var setLengthSquares = function (length) {
