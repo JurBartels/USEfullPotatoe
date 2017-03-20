@@ -22,6 +22,15 @@ var genField = function (x, y) {
     fields[1][1].used = true;
 };
 
+var setLengthSquares = function (length) {
+    if (typeof length != 'number') {
+        throw new TypeError("length isn't a number");
+    } else if (length < 1) {
+        throw new RangeError('length cannot be less than 1')
+    }
+    lengthSquare = length;
+};
+
 
 function startModel() {
     // TODO: change 2,2 to what the farmer fills in
