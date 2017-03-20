@@ -8,12 +8,6 @@ var inputContainer = null;
 var cards = null;
 var squareWidth = null;
 
-// Square is a piece of land
-var square = {
-    'used': false,
-    'nitrate': 0
-};
-
 $(document).ready(function () {
     // TODO: start remove, only here for easy testing
     initialize(10, 12, 6);  // To init everything for easy testing
@@ -80,7 +74,10 @@ var genField = function (x, y) {
     for (var i = 0; i < x; i++) {
         fields[i] = [];
         for (var j = 0; j < y; j++) {
-            fields[i][j] = square;
+            fields[i][j] = {
+                'used': false,
+                'nitrate': 0
+            };
         }
     }
 };
@@ -178,6 +175,8 @@ var setCanvas = function (canvas, x, y) {
 var canvasClick = function (canvas, event) {
     if (typeof canvas != 'string') {
         throw new TypeError('canvas needs to be a string');
+    } else if (!isInit) {
+        throw new Error('not initialized')
     }
     event = event || window.event;
     switch (canvas) {
@@ -194,7 +193,37 @@ var canvasClick = function (canvas, event) {
     var x = Math.floor((event.pageX - canvas[0].offsetLeft) / squareWidth);
     var y = Math.floor((event.pageY - canvas[0].offsetTop) / squareWidth);
 
+    switch (canvas) {
+        case canvasShape:
+            // Toggle if square is used or not
+            setUsed(x, y, !getIsUsed(x, y));
+            drawSquare(x, y, canvas);
+            break;
+        case canvasValues:
+
+            break;
+        default:
+            throw new Error("canvas needs to be either 'shape' or 'values'")
+    }
     // TODO: do something with the coordinates
+};
+
+// Method to draw a square a color dependent on if it is selected or not
+var drawSquare = function (x, y, canvas) {
+    if (typeof x != 'number' || typeof y != 'number') {
+        throw new TypeError("x or y isn't a number")
+    } else if (canvas == undefined) {
+        throw new Error('canvas is undefined')
+    } else if (!isInit) {
+        throw new Error('not initialized')
+    }
+    var context = canvas[0].getContext("2d");
+    if (fields[x][y].used) {
+        context.fillStyle = '#ff0000';
+    } else {
+        context.fillStyle = '#ffffff';
+    }
+    context.fillRect(1 + x * squareWidth, 1 + y * squareWidth, squareWidth - 1, squareWidth - 1);
 };
 
 function startModel() {
