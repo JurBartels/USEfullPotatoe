@@ -25,6 +25,7 @@ $(document).ready(function () {
     });
     inputContainer.bind('transitionend', function () {
         setCanvas(canvasShape, 10, 10); // For now a 10x10 grid
+        setCanvas(canvasValues, 10, 10); // For now a 10x10 grid
     });
 
 
