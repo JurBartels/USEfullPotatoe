@@ -8,4 +8,16 @@ html, body {
 	width: 50%;
 	float: left;
 	padding: 75px;
+	transition: width 0.3s ease;
+}
+
+#inputs {
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+}
+
+canvas {
+	border-right: 3px solid black;
+	border-bottom: 3px solid black;
 }
