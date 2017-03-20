@@ -14,6 +14,32 @@ var square = {
 $(document).ready(function () {
     canvasShape = $('#canvasShape');
     canvasValues = $('#canvasValues');
+
+    //handle the submit event for the input form
+    $("#new_input").submit(function(event){
+      event.preventDefault();
+      alert($('#nitrate').val());
+      deselect($('#new_input'))
+    });
+
+    //handles opening of an input dialog
+    $(function() {
+      $('.inputDialog').on('click', function() {
+        if($(this).hasClass('selected')) {
+          deselect($(this));
+        } else {
+          $(this).addClass('selected');
+          $('.pop').slideFadeToggle();
+        }
+        return false;
+      });
+
+      $('.close').on('click', function() {
+        deselect($('.inputDialog'));
+        return false;
+      });
+    });
+
 });
 
 var initialize = function (x, y, length) {
@@ -81,12 +107,7 @@ function startModel() {
     genField(2, 2);
 }
 
-$("#new_input").submit(function(event){
-  event.preventDefault();
-  alert($('#nitrate').val());
-  deselect($('#new_input'))
-});
-
+//sets form values to empty string and remove the selected classs
 function deselect(e) {
   $('.pop').slideFadeToggle(function() {
     $('#nitrate').val(" ")
@@ -94,23 +115,7 @@ function deselect(e) {
   });
 }
 
-$(function() {
-  $('.inputDialog').on('click', function() {
-    if($(this).hasClass('selected')) {
-      deselect($(this));
-    } else {
-      $(this).addClass('selected');
-      $('.pop').slideFadeToggle();
-    }
-    return false;
-  });
-
-  $('.close').on('click', function() {
-    deselect($('.inputDialog'));
-    return false;
-  });
-});
-
+//slide animation for the form
 $.fn.slideFadeToggle = function(easing, callback) {
   return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);
 };
