@@ -200,12 +200,11 @@ var canvasClick = function (canvas, event) {
             drawSquare(x, y, canvas);
             break;
         case canvasValues:
-
+            // TODO: do something with the coordinates
             break;
         default:
             throw new Error("canvas needs to be either 'shape' or 'values'")
     }
-    // TODO: do something with the coordinates
 };
 
 // Method to draw a square a color dependent on if it is selected or not
