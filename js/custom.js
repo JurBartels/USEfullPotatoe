@@ -30,28 +30,28 @@ $(document).ready(function () {
 
 
     //handle the submit event for the input form
-    $("#new_input").submit(function(event){
-      event.preventDefault();
-      alert($('#nitrate').val());
-      deselect($('#new_input'))
+    $("#new_input").submit(function (event) {
+        event.preventDefault();
+        alert($('#nitrate').val());
+        deselect($('#new_input'))
     });
 
     //handles opening of an input dialog
-    $(function() {
-      $('.inputDialog').on('click', function() {
-        if($(this).hasClass('selected')) {
-          deselect($(this));
-        } else {
-          $(this).addClass('selected');
-          $('.pop').slideFadeToggle();
-        }
-        return false;
-      });
+    $(function () {
+        $('.inputDialog').on('click', function () {
+            if ($(this).hasClass('selected')) {
+                deselect($(this));
+            } else {
+                $(this).addClass('selected');
+                $('.pop').slideFadeToggle();
+            }
+            return false;
+        });
 
-      $('.close').on('click', function() {
-        deselect($('.inputDialog'));
-        return false;
-      });
+        $('.close').on('click', function () {
+            deselect($('.inputDialog'));
+            return false;
+        });
     });
 
 });
@@ -162,12 +162,12 @@ var setCanvas = function (canvas, x, y) {
     canvas[0].height = squareWidth * y;
     var context = canvas[0].getContext("2d");
     var opts = {
-        distance : squareWidth,
-        lineWidth : 1,
-        gridColor : "#000000",
-        caption : false,
-        horizontalLines : true,
-        verticalLines : true
+        distance: squareWidth,
+        lineWidth: 1,
+        gridColor: "#000000",
+        caption: false,
+        horizontalLines: true,
+        verticalLines: true
     };
     new Grid(opts).draw(context);
 };
@@ -231,13 +231,13 @@ function startModel() {
 
 //sets form values to empty string and remove the selected classs
 function deselect(e) {
-  $('.pop').slideFadeToggle(function() {
-    $('#nitrate').val(" ")
-    e.removeClass('selected');
-  });
+    $('.pop').slideFadeToggle(function () {
+        $('#nitrate').val(" ");
+        e.removeClass('selected');
+    });
 }
 
 //slide animation for the form
-$.fn.slideFadeToggle = function(easing, callback) {
-  return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);
+$.fn.slideFadeToggle = function (easing, callback) {
+    return this.animate({opacity: 'toggle', height: 'toggle'}, 'fast', easing, callback);
 };
