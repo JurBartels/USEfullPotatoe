@@ -30,7 +30,7 @@ $(document).ready(function () {
     });
     inputContainer.bind('transitionend', function () {
         setCanvas(canvasShape, fields.length, fields[0].length);
-        setCanvas(canvasShape, fields.length, fields[0].length);
+        setCanvas(canvasValues, fields.length, fields[0].length);
     });
 
 
