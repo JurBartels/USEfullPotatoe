@@ -147,14 +147,19 @@ var setCanvas = function (canvas, x, y) {
     } else if (x < 1 || y < 1) {
         throw new RangeError('x and y needs to be at least 1')
     }
-    var width = inputContainer.width();
-    var height = inputContainer.height();
-    canvas[0].width = width - 71;  // card has twice 35px padding and 1 for the border
-    canvas[0].height = height - 116;  // card has twice 35px padding and 45 for the buttons and 1 for the border
-    var min = Math.min(canvas[0].width, canvas[0].height);
+    var squareWidth = null;
+    var maxWidth = inputContainer.width() - 71;     // card has twice 35px padding and 1 for the border
+    var maxHeight = inputContainer.height() - 116;  // card has twice 35px padding and 45 for the buttons and 1 for the border
+    if (maxWidth / x < maxHeight / y) {
+        squareWidth = maxWidth / x;
+    } else {
+        squareWidth = maxHeight / y;
+    }
+    canvas[0].width = squareWidth * x;
+    canvas[0].height = squareWidth * y;
     var context = canvas[0].getContext("2d");
     var opts = {
-        distance : (min / x),
+        distance : squareWidth,
         lineWidth : 1,
         gridColor : "#000000",
         caption : false,
