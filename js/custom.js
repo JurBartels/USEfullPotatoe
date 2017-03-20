@@ -176,8 +176,7 @@ var setCanvas = function (canvas, x, y) {
 };
 
 function startModel() {
-    // TODO: change 2,2 to what the farmer fills in
-    genField(2, 2);
+
 }
 
 //sets form values to empty string and remove the selected classs
