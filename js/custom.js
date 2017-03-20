@@ -100,7 +100,7 @@ var setUsed = function (x, y, used) {
         throw new TypeError('used needs to be a boolean')
     } else if (!isInit) {
         throw new Error('not initialized')
-    } else if (x > fields.length || y > fields[0].length) {
+    } else if (x >= fields.length || y >= fields[0].length) {
         throw new RangeError('x or y is bigger than the field')
     }
     fields[x][y].used = used;
@@ -113,7 +113,7 @@ var setNitrate = function (x, y, amount) {
         throw new RangeError('x, y or amount cannot be less than 0')
     } else if (!isInit) {
         throw new Error('not initialized')
-    } else if (x > fields.length || y > fields[0].length) {
+    } else if (x >= fields.length || y >= fields[0].length) {
         throw new RangeError('x or y is bigger than the field')
     }
     fields[x][y].nitrate = amount;
@@ -126,7 +126,7 @@ var getNitrate = function (x, y) {
         throw new RangeError('x or y cannot be less than 0')
     } else if (!isInit) {
         throw new Error('not initialized')
-    } else if (x > fields.length || y > fields[0].length) {
+    } else if (x >= fields.length || y >= fields[0].length) {
         throw new RangeError('x or y is bigger than the field')
     }
     return fields[x][y].nitrate;
@@ -139,7 +139,7 @@ var getIsUsed = function (x, y) {
         throw new RangeError('x or y cannot be less than 0')
     } else if (!isInit) {
         throw new Error('not initialized')
-    } else if (x > fields.length || y > fields[0].length) {
+    } else if (x >= fields.length || y >= fields[0].length) {
         throw new RangeError('x or y is bigger than the field')
     }
     return fields[x][y].used;
@@ -197,7 +197,8 @@ var canvasClick = function (canvas, event) {
         case canvasShape:
             // Toggle if square is used or not
             setUsed(x, y, !getIsUsed(x, y));
-            drawSquare(x, y, canvas);
+            drawSquare(x, y, canvasShape);
+            drawSquare(x, y, canvasValues);
             break;
         case canvasValues:
             // TODO: do something with the coordinates
@@ -217,7 +218,7 @@ var drawSquare = function (x, y, canvas) {
         throw new Error('not initialized')
     }
     var context = canvas[0].getContext("2d");
-    if (fields[x][y].used) {
+    if (getIsUsed(x, y)) {
         context.fillStyle = '#ff0000';
     } else {
         context.fillStyle = '#ffffff';
