@@ -19,7 +19,6 @@ var genField = function (x, y) {
             fields[i][j] = square;
         }
     }
-    fields[1][1].used = true;
 };
 
 var setLengthSquares = function (length) {
