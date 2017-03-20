@@ -6,6 +6,7 @@ var canvasShape = null;
 var canvasValues = null;
 var inputContainer = null;
 var cards = null;
+var squareWidth = null;
 
 // Square is a piece of land
 var square = {
@@ -153,7 +154,6 @@ var setCanvas = function (canvas, x, y) {
     } else if (x < 1 || y < 1) {
         throw new RangeError('x and y needs to be at least 1')
     }
-    var squareWidth = null;
     var maxWidth = inputContainer.width() - 71;     // card has twice 35px padding and 1 for the border
     var maxHeight = inputContainer.height() - 116;  // card has twice 35px padding and 45 for the buttons and 1 for the border
     if (maxWidth / x < maxHeight / y) {
@@ -173,6 +173,28 @@ var setCanvas = function (canvas, x, y) {
         verticalLines : true
     };
     new Grid(opts).draw(context);
+};
+
+var canvasClick = function (canvas, event) {
+    if (typeof canvas != 'string') {
+        throw new TypeError('canvas needs to be a string');
+    }
+    event = event || window.event;
+    switch (canvas) {
+        case 'shape':
+            canvas = canvasShape;
+            break;
+        case 'values':
+            canvas = canvasValues;
+            break;
+        default:
+            throw new Error("canvas needs to be either 'shape' or 'values'")
+    }
+
+    var x = Math.floor((event.pageX - canvas[0].offsetLeft) / squareWidth);
+    var y = Math.floor((event.pageY - canvas[0].offsetTop) / squareWidth);
+
+    // TODO: do something with the coordinates
 };
 
 function startModel() {
