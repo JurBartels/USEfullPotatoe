@@ -2,12 +2,19 @@
 var lengthSquare = 0;   // Length of side of square dirt
 var fields = [];       // List of squares that the farmer has
 var isInit = false;     // True if the fields var is initialized
+var canvasShape = null;
+var canvasValues = null;
 
 // Square is a piece of land
 var square = {
     'used': false,
     'nitrate': 0
 };
+
+$(document).ready(function () {
+    canvasShape = $('#canvasShape');
+    canvasValues = $('#canvasValues');
+});
 
 var initialize = function (x, y, length) {
     if (typeof x != 'number' || typeof y != 'number' || typeof length != 'number') {
