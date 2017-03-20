@@ -45,7 +45,7 @@ var setUsed = function (x, y, used) {
     if (typeof x != 'number' || typeof y != 'number') {
         throw new TypeError("x or y isn't a number");
     } else if (x < 0 || y < 0) {
-        throw new RangeError('x or y cannot be less than 1')
+        throw new RangeError('x or y cannot be less than 0')
     } else if (typeof used != 'boolean') {
         throw new TypeError('used needs to be a boolean')
     } else if (!isInit) {
