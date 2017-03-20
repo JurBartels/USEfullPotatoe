@@ -76,6 +76,32 @@ var setNitrate = function (x, y, amount) {
     fields[x][y].nitrate = amount;
 };
 
+var getNitrate = function (x, y) {
+    if (typeof x != 'number' || typeof y != 'number') {
+        throw new TypeError("x or y isn't a number");
+    } else if (x < 0 || y < 0) {
+        throw new RangeError('x or y cannot be less than 0')
+    } else if (!isInit) {
+        throw new Error('not initialized')
+    } else if (x > fields.length || y > fields[0].length) {
+        throw new RangeError('x or y is bigger than the field')
+    }
+    return fields[x][y].nitrate;
+};
+
+var getIsUsed = function (x, y) {
+    if (typeof x != 'number' || typeof y != 'number') {
+        throw new TypeError("x or y isn't a number");
+    } else if (x < 0 || y < 0) {
+        throw new RangeError('x or y cannot be less than 0')
+    } else if (!isInit) {
+        throw new Error('not initialized')
+    } else if (x > fields.length || y > fields[0].length) {
+        throw new RangeError('x or y is bigger than the field')
+    }
+    return fields[x][y].used;
+};
+
 function startModel() {
     // TODO: change 2,2 to what the farmer fills in
     genField(2, 2);
