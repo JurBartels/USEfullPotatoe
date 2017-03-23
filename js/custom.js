@@ -56,6 +56,7 @@ $(document).ready(function () {
 
 });
 
+// Public
 var initialize = function (widthField, heightField, length) {
     if (typeof widthField != 'number' || typeof heightField != 'number' || typeof length != 'number') {
         throw new TypeError("x, y or length isn't a number");
@@ -69,6 +70,7 @@ var initialize = function (widthField, heightField, length) {
     isInit = true;
 };
 
+// Private
 var genField = function (x, y) {
     if (typeof x != 'number' || typeof y != 'number') {
         throw new TypeError("x or y isn't a number");
@@ -84,6 +86,7 @@ var genField = function (x, y) {
     }
 };
 
+// Private
 var setLengthSquares = function (length) {
     if (typeof length != 'number') {
         throw new TypeError("length isn't a number");
@@ -93,6 +96,7 @@ var setLengthSquares = function (length) {
     lengthSquare = length;
 };
 
+// Private
 var setUsed = function (x, y, used) {
     if (typeof x != 'number' || typeof y != 'number') {
         throw new TypeError("x or y isn't a number");
@@ -108,6 +112,7 @@ var setUsed = function (x, y, used) {
     fields[x][y].used = used;
 };
 
+// Public
 var setNitrate = function (x, y, amount) {
     if (typeof x != 'number' || typeof y != 'number' || typeof amount != 'number') {
         throw new TypeError("x, y or amount isn't a number");
@@ -121,6 +126,7 @@ var setNitrate = function (x, y, amount) {
     fields[x][y].nitrate = amount;
 };
 
+// Public
 var getNitrate = function (x, y) {
     if (typeof x != 'number' || typeof y != 'number') {
         throw new TypeError("x or y isn't a number");
@@ -134,6 +140,7 @@ var getNitrate = function (x, y) {
     return fields[x][y].nitrate;
 };
 
+// Private
 var getIsUsed = function (x, y) {
     if (typeof x != 'number' || typeof y != 'number') {
         throw new TypeError("x or y isn't a number");
@@ -147,6 +154,7 @@ var getIsUsed = function (x, y) {
     return fields[x][y].used;
 };
 
+// Private
 var setCanvas = function (canvas, x, y) {
     if (typeof x != 'number' || typeof y != 'number') {
         throw new TypeError("x or y isn't a number")
@@ -174,6 +182,7 @@ var setCanvas = function (canvas, x, y) {
     new Grid(opts).draw(context);
 };
 
+// Public
 var canvasClick = function (canvas, event) {
     if (typeof canvas != 'string') {
         throw new TypeError('canvas needs to be a string');
@@ -210,6 +219,7 @@ var canvasClick = function (canvas, event) {
     }
 };
 
+// Private
 // Method to draw a square a color dependent on if it is selected or not
 var drawSquare = function (x, y, canvas) {
     if (typeof x != 'number' || typeof y != 'number') {
@@ -228,6 +238,7 @@ var drawSquare = function (x, y, canvas) {
     context.fillRect(1 + x * squareWidth, 1 + y * squareWidth, squareWidth - 1, squareWidth - 1);
 };
 
+// Public
 function startModel() {
 
 }
