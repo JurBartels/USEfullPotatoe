@@ -51,6 +51,11 @@ $(document).ready(function () {
         deselect($('.inputDialog'));
     });
 
+    $('#uploadWidget').submit(function(event){
+      event.preventDefault();
+      $('#someImg').src = $('#fileupload').val()
+    })
+
     //handles opening of an input dialog
     $(function () {
         $('.inputDialog').on('click', function () {
@@ -340,3 +345,17 @@ interact('.resize-drag')
         target.setAttribute('data-y', y);
         // target.textContent = Math.round(event.rect.width) + '×' + Math.round(event.rect.height);
     });
+
+    //take a filepath and set the src of an image tag
+    function readURL(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+
+              reader.onload = function (e) {
+                  $('#farmPic')
+                      .attr('src', e.target.result);
+              };
+
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
