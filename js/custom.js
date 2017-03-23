@@ -10,7 +10,7 @@ var squareWidth = null;
 
 $(document).ready(function () {
     // TODO: start remove, only here for easy testing
-    initialize(10, 12, 6);  // To init everything for easy testing
+    initialize(100, 120, 6);  // To init everything for easy testing
 
 
     // TODO: end remove
