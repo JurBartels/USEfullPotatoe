@@ -17,11 +17,8 @@ var lastY = 0;
 var formOpen = 0;
 
 $(document).ready(function () {
-    // TODO: start remove, only here for easy testing
-    // initialize(100, 120, 6);  // To init everything for easy testing
+    // TODO: fix enable square > set value > go back > disable square > square still green on second canvas
 
-
-    // TODO: end remove
     cards = $('.card');
     inputContainer = $('#inputContainer');
     canvasContainerShape = $('#canvas-container-shape');
