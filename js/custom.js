@@ -207,6 +207,7 @@ var canvasClick = function (canvas, event) {
 
     var x = Math.floor((event.pageX - canvas[0].offsetLeft) / squareWidth);
     var y = Math.floor((event.pageY - canvas[0].offsetTop) / squareWidth);
+    console.log(canvas[0].offsetLeft);
 
     switch (canvas) {
         case canvasShape:
