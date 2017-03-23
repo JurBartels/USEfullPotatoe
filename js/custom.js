@@ -8,6 +8,9 @@ var inputContainer = null;
 var cards = null;
 var squareWidth = null;
 
+var lastX = 0;
+var lastY = 0;
+
 $(document).ready(function () {
     // TODO: start remove, only here for easy testing
     initialize(100, 120, 6);  // To init everything for easy testing
@@ -32,8 +35,8 @@ $(document).ready(function () {
     //handle the submit event for the input form
     $("#new_input").submit(function (event) {
         event.preventDefault();
-        alert($('#nitrate').val());
-        deselect($('#new_input'))
+        setNitrate(lastX, lastY, ($('#nitrate').val());
+        deselect($('#new_input'));
     });
 
     //handles opening of an input dialog
@@ -213,6 +216,8 @@ var canvasClick = function (canvas, event) {
             break;
         case canvasValues:
             // TODO: do something with the coordinates
+            lastX = x;
+            lastY = y;
             break;
         default:
             throw new Error("canvas needs to be either 'shape' or 'values'")
