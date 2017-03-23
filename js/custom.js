@@ -12,6 +12,8 @@ var squareWidth = null;
 var lastX = 0;
 var lastY = 0;
 
+var formOpen = 0;
+
 $(document).ready(function () {
     // TODO: start remove, only here for easy testing
     initialize(100, 120, 6);  // To init everything for easy testing
@@ -37,23 +39,39 @@ $(document).ready(function () {
     //handle the submit event for the input form
     $("#new_input").submit(function (event) {
         event.preventDefault();
-        setNitrate(lastX, lastY, $('#nitrate').val());
-        deselect($('#new_input'));
+        if(getIsUsed(lastX,lastY)){
+          setNitrate(lastX, lastY, Number($('#nitrate').val()));
+          drawSquare(lastX, lastY, canvasValues);
+        }
+        else{
+          alert("This is not a useable square");
+        }
+        formOpen = 0;
+        deselect($('.inputDialog'));
     });
 
     //handles opening of an input dialog
     $(function () {
         $('.inputDialog').on('click', function () {
             if ($(this).hasClass('selected')) {
-                deselect($(this));
+                //deselect($(this));
             } else {
                 $(this).addClass('selected');
+                formOpen = 1;
+                var nVal = getNitrate(lastX,lastY);
+                if(nVal > 0){
+                  $('#nitrate').val(nVal);
+                }
+                else{
+                  $('#nitrate').val(" ");
+                }
                 $('.pop').slideFadeToggle();
             }
             return false;
         });
 
         $('.close').on('click', function () {
+            alert("close");
             deselect($('.inputDialog'));
             return false;
         });
@@ -218,8 +236,10 @@ var canvasClick = function (canvas, event) {
             break;
         case canvasValues:
             // TODO: do something with the coordinates
-            lastX = x;
-            lastY = y;
+            if(!formOpen){
+              lastX = x;
+              lastY = y;
+            }
             break;
         default:
             throw new Error("canvas needs to be either 'shape' or 'values'")
@@ -255,7 +275,6 @@ function startModel() {
 //sets form values to empty string and remove the selected classs
 function deselect(e) {
     $('.pop').slideFadeToggle(function () {
-        $('#nitrate').val(" ");
         e.removeClass('selected');
     });
 }
