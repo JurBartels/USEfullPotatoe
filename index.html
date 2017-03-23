@@ -63,7 +63,7 @@
 							</div>
 						</div>
 						<canvas id="canvasShape" onclick="canvasClick(canvas='shape')"></canvas>
-						<input type="checkbox" checked data-toggle="toggle">
+						<input id="canvasShapeToggle" type="checkbox" checked data-toggle="toggle">
 					</div>
 					<a href="javascript:void(0)" class="btn" onclick="$(this).parent().prev().height('100%'); $('#inputContainer').attr('style', ''); $('#outputContainer').attr('style', '');">Prev</a>
 					<a href="javascript:void(0)" class="btn" onclick="$(this).parent().height(0); $('#inputContainer').attr('style', 'width: 80%;'); $('#outputContainer').attr('style', 'width: 20%');">Next</a>
@@ -134,5 +134,11 @@
 	<script type="text/javascript" src="js/grid.min.js"></script>
 	<script type="text/javascript" src="js/interact.min.js"></script>
 	<script src="js/custom.js"></script>
+
+	<script>
+		$("#canvasShapeToggle").change(function() {
+			$("#canvas-container-shape .resize-container").toggleClass("resizing");
+		});
+	</script>
 </body>
 </html>
