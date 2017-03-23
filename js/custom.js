@@ -230,7 +230,9 @@ var drawSquare = function (x, y, canvas) {
         throw new Error('not initialized')
     }
     var context = canvas[0].getContext("2d");
-    if (getIsUsed(x, y)) {
+    if (canvas == canvasValues && getNitrate(x, y) > 0) {
+        context.fillStyle = '#00ff00'
+    } else if (getIsUsed(x, y)) {
         context.fillStyle = '#ff0000';
     } else {
         context.fillStyle = '#ffffff';
