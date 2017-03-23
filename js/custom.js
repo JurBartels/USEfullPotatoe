@@ -8,16 +8,18 @@ var inputContainer = null;
 var canvasContainer = null;
 var cards = null;
 var squareWidth = null;
+var resizeContainer = null;
 
 $(document).ready(function () {
     // TODO: start remove, only here for easy testing
-    initialize(100, 120, 6);  // To init everything for easy testing
+    // initialize(100, 120, 6);  // To init everything for easy testing
 
 
     // TODO: end remove
     cards = $('.card');
     inputContainer = $('#inputContainer');
     canvasContainer = $('#canvas-container');
+    resizeContainer = $('.resize-container');
     canvasShape = $('#canvasShape');
     canvasValues = $('#canvasValues');
 
