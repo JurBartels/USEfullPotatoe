@@ -5,6 +5,7 @@ var isInit = false;     // True if the fields var is initialized
 var canvasShape = null;
 var canvasValues = null;
 var inputContainer = null;
+var canvasContainer = null;
 var cards = null;
 var squareWidth = null;
 
@@ -16,6 +17,7 @@ $(document).ready(function () {
     // TODO: end remove
     cards = $('.card');
     inputContainer = $('#inputContainer');
+    canvasContainer = $('#canvas-container');
     canvasShape = $('#canvasShape');
     canvasValues = $('#canvasValues');
 
@@ -161,8 +163,8 @@ var setCanvas = function (canvas, x, y) {
     } else if (x < 1 || y < 1) {
         throw new RangeError('x and y needs to be at least 1')
     }
-    var maxWidth = inputContainer.width() - 71;     // card has twice 35px padding and 1 for the border
-    var maxHeight = inputContainer.height() - 116;  // card has twice 35px padding and 45 for the buttons and 1 for the border
+    var maxWidth = canvasContainer.width();     // card has twice 35px padding and 1 for the border
+    var maxHeight = canvasContainer.height();  // card has twice 35px padding and 45 for the buttons and 1 for the border
     if (maxWidth / x < maxHeight / y) {
         squareWidth = maxWidth / x;
     } else {
@@ -230,7 +232,9 @@ var drawSquare = function (x, y, canvas) {
         throw new Error('not initialized')
     }
     var context = canvas[0].getContext("2d");
-    if (getIsUsed(x, y)) {
+    if (canvas == canvasValues && getNitrate(x, y) > 0) {
+        context.fillStyle = '#00ff00'
+    } else if (getIsUsed(x, y)) {
         context.fillStyle = '#ff0000';
     } else {
         context.fillStyle = '#ffffff';
