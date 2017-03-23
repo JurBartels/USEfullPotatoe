@@ -49,13 +49,13 @@
 						<div class="inputBox">
 							<label for="squareSize">Square size (m<sup>2</sup>)</label>
 							<br>
-							<input id="squareSize" type="number" min="5" max="1000" step="1" value ="25">
+							<input id="squareSize" type="number" min="5" max="10000" step="1" value ="25">
 						</div>
 					</div>
 					<a href="javascript:void(0)" class="btn" onclick="initialize(parseInt($('#fieldWidth').val()), parseInt($('#fieldHeight').val()), Math.sqrt(parseInt($('#squareSize').val()))); $(this).parent().height(0); $('#inputContainer').attr('style', 'width: 80%;'); $('#outputContainer').attr('style', 'width: 20%');">Next</a>
 				</div>
 				<div class="inputList">
-					<div id="canvas-container" style="height: 90%; width: 100%">
+					<div id="canvas-container-shape" style="height: 90%; width: 100%">
 						<div class="resize-container">
 							<div class="resize-drag">
 								<img src="http://www.placehold.it/600x600" alt="">
@@ -67,7 +67,12 @@
 					<a href="javascript:void(0)" class="btn" onclick="$(this).parent().height(0); $('#inputContainer').attr('style', 'width: 80%;'); $('#outputContainer').attr('style', 'width: 20%');">Next</a>
 				</div>
 				<div class="inputList">
-					<div style="height: 90%; width: 100%">
+					<div id="canvas-container-values" style="height: 90%; width: 100%">
+						<div class="resize-container">
+							<div class="resize-drag">
+								<img src="http://www.placehold.it/600x600" alt="">
+							</div>
+						</div>
 						<canvas id="canvasValues" onclick="canvasClick(canvas='values')"></canvas>
 					</div>
 					<a href="javascript:void(0)" class="btn" onclick="$(this).parent().prev().height('100%'); $('#inputContainer').attr('style', 'width: 80%;'); $('#outputContainer').attr('style', 'width: 20%');">Prev</a>

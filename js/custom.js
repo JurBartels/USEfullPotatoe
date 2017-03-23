@@ -5,7 +5,8 @@ var isInit = false;     // True if the fields var is initialized
 var canvasShape = null;
 var canvasValues = null;
 var inputContainer = null;
-var canvasContainer = null;
+var canvasContainerShape = null;
+var canvasContainerValues = null;
 var cards = null;
 var squareWidth = null;
 var resizeContainer = null;
@@ -18,7 +19,8 @@ $(document).ready(function () {
     // TODO: end remove
     cards = $('.card');
     inputContainer = $('#inputContainer');
-    canvasContainer = $('#canvas-container');
+    canvasContainerShape = $('#canvas-container-shape');
+    canvasContainerValues = $('#canvas-container-values');
     resizeContainer = $('.resize-container');
     canvasShape = $('#canvasShape');
     canvasValues = $('#canvasValues');
@@ -165,8 +167,22 @@ var setCanvas = function (canvas, x, y) {
     } else if (x < 1 || y < 1) {
         throw new RangeError('x and y needs to be at least 1')
     }
-    var maxWidth = canvasContainer.width();     // card has twice 35px padding and 1 for the border
-    var maxHeight = canvasContainer.height();  // card has twice 35px padding and 45 for the buttons and 1 for the border
+
+    var maxWidth;
+    var maxHeight;
+
+    switch(canvas) {
+        case canvasShape:
+            maxWidth = canvasContainerShape.width() - 1; // -1 for border
+            maxHeight = canvasContainerShape.height() - 1; // -1 for border
+            break;
+
+        case canvasValues:
+            maxWidth = canvasContainerValues.width() - 1; // -1 for border
+            maxHeight = canvasContainerValues.height() - 1; // -1 for border
+            break;
+    }
+
     if (maxWidth / x < maxHeight / y) {
         squareWidth = maxWidth / x;
     } else {
@@ -174,8 +190,19 @@ var setCanvas = function (canvas, x, y) {
     }
     canvas[0].width = squareWidth * x;
     canvas[0].height = squareWidth * y;
-    resizeContainer.width(squareWidth * x);
-    resizeContainer.height(squareWidth * y);
+
+    switch(canvas) {
+        case canvasShape:
+            canvasContainerShape.find('.resize-container').width(squareWidth * x);
+            canvasContainerShape.find('.resize-container').height(squareWidth * y);
+            break;
+
+        case canvasValues:
+            canvasContainerValues.find('.resize-container').width(squareWidth * x);
+            canvasContainerValues.find('.resize-container').height(squareWidth * y);
+            break;
+    }
+
     var context = canvas[0].getContext("2d");
     var opts = {
         distance: squareWidth,
@@ -209,7 +236,6 @@ var canvasClick = function (canvas, event) {
 
     var x = Math.floor((event.pageX - canvas[0].offsetLeft) / squareWidth);
     var y = Math.floor((event.pageY - canvas[0].offsetTop) / squareWidth);
-    console.log(canvas[0].offsetLeft);
 
     switch (canvas) {
         case canvasShape:
