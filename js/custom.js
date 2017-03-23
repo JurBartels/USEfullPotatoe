@@ -174,6 +174,8 @@ var setCanvas = function (canvas, x, y) {
     }
     canvas[0].width = squareWidth * x;
     canvas[0].height = squareWidth * y;
+    resizeContainer.width(squareWidth * x);
+    resizeContainer.height(squareWidth * y);
     var context = canvas[0].getContext("2d");
     var opts = {
         distance: squareWidth,
