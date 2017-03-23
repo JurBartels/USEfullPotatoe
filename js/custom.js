@@ -56,12 +56,14 @@ $(document).ready(function () {
 
 });
 
-var initialize = function (x, y, length) {
-    if (typeof x != 'number' || typeof y != 'number' || typeof length != 'number') {
+var initialize = function (widthField, heightField, length) {
+    if (typeof widthField != 'number' || typeof heightField != 'number' || typeof length != 'number') {
         throw new TypeError("x, y or length isn't a number");
-    } else if (x < 1 || y < 1 || length < 1) {
+    } else if (widthField < 1 || heightField < 1 || length < 1) {
         throw new RangeError('x, y and length cannot be less than 1')
     }
+    var x = Math.ceil(widthField / length);
+    var y = Math.ceil(heightField / length);
     setLengthSquares(length);
     genField(x, y);
     isInit = true;
