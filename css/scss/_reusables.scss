@@ -50,6 +50,15 @@
 			}
 		}
 	}
+
+	.resize-container {
+		pointer-events: none;
+		position: absolute;
+
+		img {
+			opacity: 0.25;
+		}
+	}
 }
 
 .btn {
