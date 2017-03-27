@@ -32,6 +32,7 @@ $(document).ready(function () {
         event.stopPropagation();
     });
     inputContainer.bind('transitionend', function () {
+        checkImg();
         setCanvas(canvasShape, fields.length, fields[0].length);
         setCanvas(canvasValues, fields.length, fields[0].length);
     });
@@ -316,6 +317,14 @@ function deselect(e) {
 //slide animation for the form
 $.fn.slideFadeToggle = function (easing, callback) {
     return this.animate({opacity: 'toggle', height: 'toggle'}, 'fast', easing, callback);
+};
+
+// Hide img div if there is no img to show
+var checkImg = function () {
+    var src = $('#farmPic').attr('src');
+    if (src == '#') {
+        $('.resize-drag').hide();
+    }
 };
 
 interact('.resize-drag')
