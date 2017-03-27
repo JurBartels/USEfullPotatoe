@@ -324,6 +324,8 @@ var checkImg = function () {
     var src = $('#farmPic').attr('src');
     if (src == '#') {
         $('.resize-drag').hide();
+    } else {
+        $('.resize-drag').show();
     }
 };
 
