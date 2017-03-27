@@ -104,6 +104,7 @@ var genField = function (x, y) {
     if (typeof x != 'number' || typeof y != 'number') {
         throw new TypeError("x or y isn't a number");
     }
+    fields = [];
     for (var i = 0; i < x; i++) {
         fields[i] = [];
         for (var j = 0; j < y; j++) {
