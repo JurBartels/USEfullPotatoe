@@ -45,7 +45,7 @@ $(document).ready(function () {
           drawSquare(lastX, lastY, canvasValues);
         }
         else{
-          alert("This is not a useable square");
+          alert("This is not a usable square");
         }
         formOpen = 0;
         deselect($('.inputDialog'));
