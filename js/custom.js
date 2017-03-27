@@ -17,6 +17,7 @@ var lastY = 0;
 var formOpen = 0;
 
 $(document).ready(function () {
+    checkImg();
 
     cards = $('.card');
     inputContainer = $('#inputContainer');
@@ -31,7 +32,6 @@ $(document).ready(function () {
         event.stopPropagation();
     });
     inputContainer.bind('transitionend', function () {
-        checkImg();
         setCanvas(canvasShape, fields.length, fields[0].length);
         setCanvas(canvasValues, fields.length, fields[0].length);
     });
@@ -92,6 +92,7 @@ var initialize = function (widthField, heightField, length) {
     } else if (widthField < 1 || heightField < 1 || length < 1) {
         throw new RangeError('x, y and length cannot be less than 1')
     }
+    checkImg();
     var x = Math.ceil(widthField / length);
     var y = Math.ceil(heightField / length);
     setLengthSquares(length);
