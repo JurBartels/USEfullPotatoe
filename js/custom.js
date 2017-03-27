@@ -17,7 +17,6 @@ var lastY = 0;
 var formOpen = 0;
 
 $(document).ready(function () {
-    // TODO: fix enable square > set value > go back > disable square > square still green on second canvas
 
     cards = $('.card');
     inputContainer = $('#inputContainer');
