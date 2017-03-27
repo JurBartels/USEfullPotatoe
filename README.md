@@ -10,3 +10,4 @@ Check grid generation
 
 ## TODO
 Verplaatsen afbeelding
+Rename repo?
