@@ -11,3 +11,6 @@ Check grid generation
 ## TODO
 Verplaatsen afbeelding
 Rename repo?
+
+## Enhancement
+Als je op een vakje klikt, gelijk vakje selecteren om in te typen
