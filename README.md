@@ -5,11 +5,7 @@ its a useless potatoe
 Werkt niet op firefox
 Afbeelding groter dan div is niet handig
 Afbeelding zichtbaar na uploaden op eerste pagina
-Hokjes nitraat ingevuld > hokje weg > hokje nog steeds groen
 
 ## TODO
 Verplaatsen afbeelding
 Rename repo?
-
-## Enhancement
-Als je op een vakje klikt, gelijk vakje selecteren om in te typen
