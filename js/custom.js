@@ -83,6 +83,11 @@ $(document).ready(function () {
         });
     });
 
+    //check if any squares are no longer used.
+    $('#nextbtn').on('click', function(){
+      validateUsed(canvasValues);
+    });
+
 });
 
 // Public
@@ -415,5 +420,16 @@ function dragMoveListener (event) {
     target.setAttribute('data-y', y);
 }
 
+//If a fields is not in use, reset the value to 0 and redraw.
+function validateUsed(canvas){
+  for(i = 0; i < fields.length;i++){
+    for(j = 0; j < fields[i].length; j++){
+      if(!getIsUsed(i,j)){
+        fields[i][j] = 0;
+        drawSquare(i,j,canvas);
+      }
+    }
+  }
+}
 // this is used later in the resizing and gesture demos
 window.dragMoveListener = dragMoveListener;
