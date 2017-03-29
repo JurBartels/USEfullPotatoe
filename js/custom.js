@@ -337,6 +337,9 @@ var checkImg = function () {
 };
 
 var calcYield = function () {
+    if (!isInit) {
+        throw new Error('not initialized')
+    }
     // y = -0,0005x^2 + 0,1976x + 28,414
     var potato_yield = 0;
     for (var x = 0; x < fields.length; x++) {
