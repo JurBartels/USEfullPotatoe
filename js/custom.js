@@ -336,6 +336,21 @@ var checkImg = function () {
     }
 };
 
+var calcYield = function () {
+    if (!isInit) {
+        throw new Error('not initialized')
+    }
+    // y = -0,0005x^2 + 0,1976x + 28,414
+    var potato_yield = 0;
+    for (var x = 0; x < fields.length; x++) {
+        for (var y = 0; y < fields[0].length; y++) {
+            var nitrate = getNitrate(x, y);
+            potato_yield += (-0.0005 * Math.pow(nitrate, 2) + 0.1976 * nitrate + 28.414);
+        }
+    }
+    return potato_yield;
+};
+
 interact('.resize-drag')
     .draggable({
         onmove: window.dragMoveListener
