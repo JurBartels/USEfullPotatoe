@@ -40,13 +40,8 @@ $(document).ready(function () {
     //handle the submit event for the input form
     $("#new_input").submit(function (event) {
         event.preventDefault();
-        if(getIsUsed(lastX,lastY)){
-          setNitrate(lastX, lastY, Number($('#nitrate').val()));
-          drawSquare(lastX, lastY, canvasValues);
-        }
-        else{
-          alert("This is not a usable square");
-        }
+        setNitrate(lastX, lastY, Number($('#nitrate').val()));
+        drawSquare(lastX, lastY, canvasValues);
         formOpen = 0;
         deselect($('.inputDialog'));
     });
@@ -59,6 +54,7 @@ $(document).ready(function () {
     //handles opening of an input dialog
     $(function () {
         $('.inputDialog').on('click', function () {
+          if(getIsUsed(lastX,lastY)){
             if ($(this).hasClass('selected')) {
                 //deselect($(this));
             } else {
@@ -72,15 +68,26 @@ $(document).ready(function () {
                   $('#nitrate').val(" ");
                 }
                 $('.pop').slideFadeToggle();
+                $('#nitrate').focus();
             }
             return false;
+          }
+          else {
+            alert("This is not a usable square");
+          }
         });
+
 
         $('.close').on('click', function () {
             alert("close");
             deselect($('.inputDialog'));
             return false;
         });
+    });
+
+    //check if any squares are no longer used.
+    $('#nextbtn').on('click', function(){
+      validateUsed(canvasValues);
     });
 
 });
@@ -425,6 +432,18 @@ function dragMoveListener (event) {
     // update the posiion attributes
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
+}
+
+//If a fields is not in use, reset the value to 0 and redraw.
+function validateUsed(canvas){
+  for(i = 0; i < fields.length;i++){
+    for(j = 0; j < fields[i].length; j++){
+      if(!getIsUsed(i,j)){
+        fields[i][j] = 0;
+        drawSquare(i,j,canvas);
+      }
+    }
+  }
 }
 
 // this is used later in the resizing and gesture demos
