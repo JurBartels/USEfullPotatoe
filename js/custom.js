@@ -11,6 +11,9 @@ var canvasContainerValues = null;
 var cards = null;
 var squareWidth = null;
 var resizeContainer = null;
+var soilType = null;
+var yieldPrevYear = null;
+var nitrateAvrPrevYear = null;
 
 var lastX = 0;
 var lastY = 0;
@@ -313,7 +316,8 @@ var drawSquare = function (x, y, canvas) {
 };
 
 // Public
-function startModel() {
+function startModel(soil, yieldPrev, nitrateAvr) {
+    storeVariables(soil, yieldPrev, nitrateAvr);
     $("#outputs").html(calcYield() + "");
 }
 
@@ -495,5 +499,17 @@ var prevPage = function(wideInput = false) {
     }
 };
 
+var storeVariables = function (soil, yieldPrev, nitrateAvr) {
+    if (soil == undefined || yieldPrev == undefined || nitrateAvr == undefined) {
+        throw new Error('Value is undefined.');
+    } else if (typeof soil != 'string') {
+        throw new TypeError('soil needs to be a string.');
+    } else if (typeof yieldPrev != 'number' || typeof nitrateAvr != 'number') {
+        throw new TypeError('yieldPrev and nitrateAvr need to be a number.')
+    }
+    soilType = soil;
+    yieldPrevYear = yieldPrev;
+    nitrateAvrPrevYear = nitrateAvr;
+};
 // this is used later in the resizing and gesture demos
 window.dragMoveListener = dragMoveListener;
