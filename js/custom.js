@@ -5,6 +5,7 @@ var isInit = false;     // True if the fields var is initialized
 var canvasShape = null;
 var canvasValues = null;
 var inputContainer = null;
+var inputLists = null;
 var canvasContainerShape = null;
 var canvasContainerValues = null;
 var cards = null;
@@ -21,6 +22,7 @@ $(document).ready(function () {
 
     cards = $('.card');
     inputContainer = $('#inputContainer');
+    inputLists = $('.inputList');
     canvasContainerShape = $('#canvas-container-shape');
     canvasContainerValues = $('#canvas-container-values');
     resizeContainer = $('.resize-container');
@@ -28,12 +30,10 @@ $(document).ready(function () {
     canvasValues = $('#canvasValues');
 
     // Prevent children updating width trigger
-    cards.bind('transitionend', function (event) {
-        event.stopPropagation();
-    });
-    inputContainer.bind('transitionend', function () {
+    inputLists.bind('transitionend', function (event) {
+        if (event.target != $('.inputList.active')[0]) {return}
         setCanvas(canvasShape, fields.length, fields[0].length);
-        // setCanvas(canvasValues, fields.length, fields[0].length);
+        setCanvas(canvasValues, fields.length, fields[0].length);
     });
 
 
@@ -214,6 +214,8 @@ var setCanvas = function (canvas, x, y) {
             maxHeight = canvasContainerValues.height() - 1; // -1 for border
             break;
     }
+
+    if (maxWidth <= 0 || maxHeight <= 0) {return;}
 
     if (maxWidth / x < maxHeight / y) {
         squareWidth = maxWidth / x;
