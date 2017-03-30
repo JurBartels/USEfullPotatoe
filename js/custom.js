@@ -457,5 +457,33 @@ function validateUsed(canvas){
   }
 }
 
+var nextPage = function(wideInput = false) {
+    var current = $(".inputList.active");
+    $(".inputList.active").next().addClass("active");
+    current.removeClass("active");
+
+    if (wideInput) {
+        $('#inputContainer').attr('style', 'width: 80%;');
+        $('#outputContainer').attr('style', 'width: 20%');
+    }else {
+        $('#inputContainer').attr('style', '');
+        $('#outputContainer').attr('style', '');
+    }
+};
+
+var prevPage = function(wideInput = false) {
+    var current = $(".inputList.active");
+    $(".inputList.active").prev().addClass("active");
+    current.removeClass("active");
+
+    if (wideInput) {
+        $('#inputContainer').attr('style', 'width: 80%;');
+        $('#outputContainer').attr('style', 'width: 20%');
+    }else {
+        $('#inputContainer').attr('style', '');
+        $('#outputContainer').attr('style', '');
+    }
+};
+
 // this is used later in the resizing and gesture demos
 window.dragMoveListener = dragMoveListener;
