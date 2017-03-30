@@ -455,6 +455,14 @@ function validateUsed(canvas){
   }
 }
 
+function redrawCanvas(canvas){
+  for(i = 0; i < fields.length;i++){
+    for(j = 0; j < fields[i].length; j++){
+      drawSquare(i,j,canvas);
+    }
+  }
+}
+
 var nextPage = function(wideInput = false) {
     var current = $(".inputList.active");
     $(".inputList.active").next().addClass("active");
