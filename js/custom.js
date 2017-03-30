@@ -34,6 +34,8 @@ $(document).ready(function () {
         if (event.target != $('.inputList.active')[0]) {return}
         setCanvas(canvasShape, fields.length, fields[0].length);
         setCanvas(canvasValues, fields.length, fields[0].length);
+        redrawCanvas(canvasShape);
+        redrawCanvas(canvasValues);
     });
 
 
@@ -453,6 +455,14 @@ function validateUsed(canvas){
         setNitrate(i, j, 0);
         drawSquare(i,j,canvas);
       }
+    }
+  }
+}
+
+function redrawCanvas(canvas){
+  for(i = 0; i < fields.length;i++){
+    for(j = 0; j < fields[i].length; j++){
+      drawSquare(i,j,canvas);
     }
   }
 }
