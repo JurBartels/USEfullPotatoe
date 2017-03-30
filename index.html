@@ -48,12 +48,6 @@
 							</div>
 						</div>
 						<div class="inputBox">
-							<div class="messagepop pop">
-								<form method="post" id="new_input" class="new_dialog" action="/messages">
-								<p><label for="N">Kg/ha</label><input type="text" size="30" name="nitrate" id="nitrate" /></p>
-								<p><input type="submit" id="submitbtn" name="submitbtn" value="Submit"></p>
-								</form>
-							</div>
 							<label for="squareSize">Square size (m<sup>2</sup>)</label>
 							<br>
 							<input id="squareSize" type="number" min="5" max="10000" step="1" value ="25">
@@ -118,6 +112,14 @@
 								<img src="#" id="aaa" alt="">
 							</div>
 						</div> -->
+						<div class="inputBox">
+							<div class="messagepop pop">
+								<form method="post" id="new_input" class="new_dialog" action="/messages">
+								<p><label for="N">Kg/ha</label><input type="text" size="30" name="nitrate" id="nitrate" /></p>
+								<p><input type="submit" id="submitbtn" name="submitbtn" value="Submit"></p>
+								</form>
+							</div>
+						</div>
 						<canvas id="canvasValues" class="inputDialog" onclick="$('#inputContainer').attr('style', 'width: 80%;'); $('#outputContainer').attr('style', 'width: 20%'); canvasClick(canvas='values',event)"></canvas>
 					</div>
 					<br>
