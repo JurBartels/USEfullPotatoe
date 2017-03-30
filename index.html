@@ -34,21 +34,21 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="inputBox">
-									<label for="fieldWidth">Field width (m)</label>
+									<label for="fieldWidth">Field width <span class="unit">(m)</span></label>
 									<br>
 									<input id="fieldWidth" type="number" min="5" max="1000" step="1" value ="100">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="inputBox">
-									<label for="fieldHeight">Field height (m)</label>
+									<label for="fieldHeight">Field height <span class="unit">(m)</span></label>
 									<br>
 									<input id="fieldHeight" type="number" min="5" max="1000" step="1" value ="100">
 								</div>
 							</div>
 						</div>
 						<div class="inputBox">
-							<label for="squareSize">Square size (m<sup>2</sup>)</label>
+							<label for="squareSize">Square size <span class="unit">(m<sup>2</sup>)</span></label>
 							<br>
 							<input id="squareSize" type="number" min="5" max="10000" step="1" value ="25">
 						</div>
@@ -65,14 +65,14 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="inputBox">
-									<label for="lastYield">Yield last year (ton/ha)</label>
+									<label for="lastYield">Yield last year <span class="unit">(ton/ha)</span></label>
 									<br>
 									<input id="lastYield" type="number" min="5" max="1000" step="1" value ="100">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="inputBox">
-									<label for="lastN">avg. N last year (kg/ha)</label>
+									<label for="lastN">avg. N last year <span class="unit">(kg/ha)</span></label>
 									<br>
 									<input id="lastN" type="number" min="5" max="1000" step="1" value ="100">
 								</div>
@@ -82,8 +82,8 @@
 							<label for="groundType">Ground type</label>
 							<br>
 							<select name="groundType" id="groundType">
-								<option value="clay">Clay</option>
 								<option value="sand">Sand</option>
+								<option value="clay">Clay</option>
 							</select>
 						</div>
 					</div>
@@ -136,21 +136,21 @@
 			<div id="outputs" class="hide">
 				<div class="group">
 					<h2>Old method</h2>
-					<span id="oldTotalYield"></span> <span>kg total yield</span>
+					<span id="oldTotalYield"></span> <span class="unit">kg total yield</span>
 					<br>
-					<span id="oldHaYield"></span> <span>kg/ha yield</span>
+					<span id="oldHaYield"></span> <span class="unit">kg/ha yield</span>
 				</div>
 				<div class="group">
 					<h2>New method</h2>
-					<span id="newTotalYield"></span> <span>kg total yield</span>
+					<span id="newTotalYield"></span> <span class="unit">kg total yield</span>
 					<br>
-					<span id="newHaYield"></span> <span>kg/ha yield</span>
+					<span id="newHaYield"></span> <span class="unit">kg/ha yield</span>
 				</div>
 				<div class="group">
 					<h2>Change</h2>
-					<span id="changeTotalYield"></span> <span>kg total yield</span>
+					<span id="changeTotalYield"></span> <span class="unit">kg total yield</span>
 					<br>
-					<span id="changeHaYield"></span> <span>kg/ha yield</span>
+					<span id="changeHaYield"></span> <span class="unit">kg/ha yield</span>
 				</div>
 			</div>
 		</div>

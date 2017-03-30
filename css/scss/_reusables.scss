@@ -147,10 +147,6 @@
 			font-size: 20px;
 		}
 
-		span:not([id]) {
-			color: #8a8a8a;
-		}
-
 		.pos {
 			color: $posColor;
 		}
@@ -163,4 +159,8 @@
 	&.hide {
 		display: none;
 	}
+}
+
+.unit {
+	color: #8a8a8a;
 }
