@@ -42,7 +42,8 @@
 		.inputBox {
 			border: 1px solid #dfdfdf;
 			border-radius: 5px;
-			width: 450px;
+			width: 350px;
+			margin-bottom: 5px;
 
 			label {
 				width: 100%;
@@ -53,7 +54,7 @@
 				font-weight: 100;
 			}
 
-			input {
+			input, select {
 				width: 98%;
 				height: 35px;
 				border: none;

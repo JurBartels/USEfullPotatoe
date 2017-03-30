@@ -31,19 +31,22 @@
 			<div id="inputs">
 				<div class="inputList active">
 					<div class="group">
-						<div class="inputBox">
-							<label for="fieldWidth">Field width (m)</label>
-							<br>
-							<input id="fieldWidth" type="number" min="5" max="1000" step="1" value ="100">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="inputBox">
+									<label for="fieldWidth">Field width (m)</label>
+									<br>
+									<input id="fieldWidth" type="number" min="5" max="1000" step="1" value ="100">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="inputBox">
+									<label for="fieldHeight">Field height (m)</label>
+									<br>
+									<input id="fieldHeight" type="number" min="5" max="1000" step="1" value ="100">
+								</div>
+							</div>
 						</div>
-						<br>
-						<div class="inputBox">
-							<label for="fieldHeight">Field height (m)</label>
-							<br>
-							<input id="fieldHeight" type="number" min="5" max="1000" step="1" value ="100">
-						</div>
-					</div>
-					<div class="group">
 						<div class="inputBox">
 							<div class="messagepop pop">
 								<form method="post" id="new_input" class="new_dialog" action="/messages">
@@ -59,14 +62,41 @@
 					<div class="group">
 						<div class="inputBox">
 							<form action="/upload" id="uploadWidget">
-								<input type="file" onchange="readURL(this);">
+								<label for="bgUpload">Background image</label>
+								<input type="file" id="bgUpload" onchange="readURL(this);">
 							</form>
+						</div>
+					</div>
+					<div class="group">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="inputBox">
+									<label for="lastYield">Yield last year (ton/ha)</label>
+									<br>
+									<input id="lastYield" type="number" min="5" max="1000" step="1" value ="100">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="inputBox">
+									<label for="lastN">avg. N last year (kg/ha)</label>
+									<br>
+									<input id="lastN" type="number" min="5" max="1000" step="1" value ="100">
+								</div>
+							</div>
+						</div>
+						<div class="inputBox">
+							<label for="groundType">Ground type</label>
+							<br>
+							<select name="groundType" id="groundType">
+								<option value="clay">Clay</option>
+								<option value="sand">Sand</option>
+							</select>
 						</div>
 					</div>
 					<a href="javascript:void(0)" class="btn" onclick="nextPage(true); initialize(parseInt($('#fieldWidth').val()), parseInt($('#fieldHeight').val()), Math.sqrt(parseInt($('#fieldHeight').val())));">Next</a>
 				</div>
 				<div class="inputList">
-					<div id="canvas-container-shape" style="height: 85%; width: 100%">
+					<div id="canvas-container-shape" style="height: 83%; width: 100%">
 						<div class="resize-container">
 							<div class="resize-drag">
 								<img src="#" id="farmPic" alt="">
@@ -74,24 +104,25 @@
 						</div>
 						<canvas id="canvasShape" onclick="canvasClick(canvas='shape',event)"></canvas>
 					</div>
+					<br>
 					<input id="canvasShapeToggle" type="checkbox" checked data-toggle="toggle" style="color: white;">
 					<span style="padding-left: 5px">Toggle resize/shape</span>
 					<br><br>
 					<a href="javascript:void(0)" class="btn" onclick="prevPage();">Prev</a>
 					<a href="javascript:void(0)" class="btn" id="nextbtn" onclick="nextPage(true);">Next</a>
 				</div>
-				<div class="inputList">
+				<div class="inputList" onclick="if(event.target != this){return} $('#inputContainer').attr('style', 'width: 80%;'); $('#outputContainer').attr('style', 'width: 20%');">
 					<div id="canvas-container-values" style="height: 90%; width: 100%">
 						<div class="resize-container">
 							<div class="resize-drag">
 								<img src="#" id="aaa" alt="">
 							</div>
 						</div>
-						<canvas id="canvasValues" class="inputDialog" onclick="canvasClick(canvas='values',event)"></canvas>
+						<canvas id="canvasValues" class="inputDialog" onclick="$('#inputContainer').attr('style', 'width: 80%;'); $('#outputContainer').attr('style', 'width: 20%'); canvasClick(canvas='values',event)"></canvas>
 					</div>
 					<br>
 					<a href="javascript:void(0)" class="btn" onclick="prevPage(true);">Prev</a>
-					<a href="javascript:void(0)" class="btn" onclick="startModel()">Go</a>
+					<a href="javascript:void(0)" class="btn" onclick="startModel($('#groundType').val(), parseInt($('#lastYield').val()), parseInt($('#lastN').val())); $('#inputContainer').attr('style', ''); $('#outputContainer').attr('style', '');">Go</a>
 				</div>
 			</div>
 		</div>
