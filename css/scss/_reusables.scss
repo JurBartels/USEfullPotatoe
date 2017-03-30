@@ -30,6 +30,10 @@
 		}
 	}
 
+	&:not(.active) {
+		pointer-events: none;
+	}
+
 	.group {
 		border-bottom: 1px solid #aaaaaa;
 		padding-bottom: 15px;
