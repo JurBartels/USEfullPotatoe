@@ -35,10 +35,6 @@
 	}
 
 	.group {
-		border-bottom: 1px solid #aaaaaa;
-		padding-bottom: 15px;
-		margin-bottom: 15px;
-
 		.inputBox {
 			border: 1px solid #dfdfdf;
 			border-radius: 5px;
@@ -128,4 +124,10 @@
 
 .toggle-group label {
 	color: white;
+}
+
+.group {
+	border-bottom: 1px solid #aaaaaa;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
 }
