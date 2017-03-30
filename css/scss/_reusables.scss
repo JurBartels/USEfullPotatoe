@@ -131,3 +131,36 @@
 	padding-bottom: 15px;
 	margin-bottom: 15px;
 }
+
+#outputs {
+	.group {
+		height: 200px;
+
+		span {
+			height: 25px;
+		}
+
+		span[id] {
+			min-width: 50px;
+			text-align: right;
+			display: inline-block;
+			font-size: 20px;
+		}
+
+		span:not([id]) {
+			color: #8a8a8a;
+		}
+
+		.pos {
+			color: $posColor;
+		}
+
+		.neg {
+			color: $negColor;
+		}
+	}
+
+	&.hide {
+		display: none;
+	}
+}
