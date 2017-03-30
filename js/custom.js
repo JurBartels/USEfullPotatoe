@@ -33,7 +33,7 @@ $(document).ready(function () {
     });
     inputContainer.bind('transitionend', function () {
         setCanvas(canvasShape, fields.length, fields[0].length);
-        // setCanvas(canvasValues, fields.length, fields[0].length);
+        setCanvas(canvasValues, fields.length, fields[0].length);
     });
 
 
@@ -277,7 +277,6 @@ var canvasClick = function (canvas, event) {
             drawSquare(x, y, canvasValues);
             break;
         case canvasValues:
-            // TODO: do something with the coordinates
             if(!formOpen){
               lastX = x;
               lastY = y;
@@ -311,7 +310,7 @@ var drawSquare = function (x, y, canvas) {
 
 // Public
 function startModel() {
-
+    $("#outputs").html(calcYield() + "");
 }
 
 //sets form values to empty string and remove the selected classs
@@ -345,6 +344,7 @@ var calcYield = function () {
     for (var x = 0; x < fields.length; x++) {
         for (var y = 0; y < fields[0].length; y++) {
             var nitrate = getNitrate(x, y);
+            console.log(nitrate);
             potato_yield += (-0.0005 * Math.pow(nitrate, 2) + 0.1976 * nitrate + 28.414);
         }
     }
@@ -442,7 +442,7 @@ function validateUsed(canvas){
   for(i = 0; i < fields.length;i++){
     for(j = 0; j < fields[i].length; j++){
       if(!getIsUsed(i,j)){
-        fields[i][j] = 0;
+        setNitrate(i, j, 0);
         drawSquare(i,j,canvas);
       }
     }

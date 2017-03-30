@@ -96,7 +96,7 @@
 					<a href="javascript:void(0)" class="btn" onclick="nextPage(true); initialize(parseInt($('#fieldWidth').val()), parseInt($('#fieldHeight').val()), Math.sqrt(parseInt($('#fieldHeight').val())));">Next</a>
 				</div>
 				<div class="inputList">
-					<div id="canvas-container-shape" style="height: 90%; width: 100%">
+					<div id="canvas-container-shape" style="height: 85%; width: 100%">
 						<div class="resize-container draggable">
 							<div class="resize-drag">
 								<img src="#" id="farmPic" alt="">
@@ -104,7 +104,9 @@
 						</div>
 						<canvas id="canvasShape" onclick="canvasClick(canvas='shape',event)"></canvas>
 					</div>
-					<input id="canvasShapeToggle" type="checkbox" checked data-toggle="toggle">
+					<input id="canvasShapeToggle" type="checkbox" checked data-toggle="toggle" style="color: white;">
+					<span style="padding-left: 5px">Toggle resize/shape</span>
+					<br><br>
 					<a href="javascript:void(0)" class="btn" onclick="prevPage();">Prev</a>
 					<a href="javascript:void(0)" class="btn" id="nextbtn" onclick="nextPage(true);">Next</a>
 				</div>
@@ -118,30 +120,6 @@
 						<canvas id="canvasValues" class="inputDialog" onclick="canvasClick(canvas='values',event)"></canvas>
 					</div>
 					<br>
-					<a href="javascript:void(0)" class="btn" onclick="prevPage(true);">Prev</a>
-					<a href="javascript:void(0)" class="btn" onclick="nextPage();">Next</a>
-				</div>
-				<div class="inputList">
-					<div class="group">
-						<div class="inputBox">
-							<label for="input1">input1</label>
-							<br>
-							<input id="input1" type="text">
-						</div>
-						<br>
-						<div class="inputBox">
-							<label for="input2">input2</label>
-							<br>
-							<input id="input2" type="text">
-						</div>
-					</div>
-					<div class="group">
-						<div class="inputBox">
-							<label for="input3">input3</label>
-							<br>
-							<input id="input3" type="text">
-						</div>
-					</div>
 					<a href="javascript:void(0)" class="btn" onclick="prevPage(true);">Prev</a>
 					<a href="javascript:void(0)" class="btn" onclick="startModel()">Go</a>
 				</div>
