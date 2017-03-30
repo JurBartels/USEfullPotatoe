@@ -175,7 +175,7 @@ var setNitrate = function (x, y, amount) {
     fields[x][y].nitrate = amount;
 };
 
-// Public
+// Public, returns amount of nitrate in kg/ha
 var getNitrate = function (x, y) {
     if (typeof x != 'number' || typeof y != 'number') {
         throw new TypeError("x or y isn't a number");
@@ -349,12 +349,13 @@ var checkImg = function () {
     }
 };
 
+// returns yield in ton/ha. expects x to be in kg/ha
 var calcYield = function (x, offset=5.9366) {
     //y = -0,0005x2 + 0.297x + offset
     if (typeof x != 'number' || typeof offset != 'number') {
         throw new TypeError("x of offset isn't a number.");
     }
-    return (-0.0005 * Math.pow(x, 2) + 0.297 * x + offset);
+    return (((-0.0005) * Math.pow(x, 2)) + (0.297 * x) + offset);
 };
 
 interact('.resize-drag')
@@ -500,10 +501,13 @@ function checkMobile() {
 var calcOffset = function (area) {
     if (typeof area != 'number') {
         throw new TypeError("area isn't a number.")
+    } else if (nitrateAvrPrevYear == null) {
+        throw new Error("nitrateAvrPrevYear isn't defined.")
     }
-    return yieldPrevYear * area - calcYield(nitrateAvrPrevYear, 0);
+    return yieldPrevYear * area - calcYield(nitrateAvrPrevYear, 0) * area;  // correct
 };
 
+// returns to be added nitrate in kg/ha. expects N to be in kg/ha
 var calcSoilFormula = function (N) {
     if (typeof N != 'number') {
         throw new TypeError("N needs to be a number.")
@@ -513,11 +517,11 @@ var calcSoilFormula = function (N) {
     switch(soilType) {
         case 'sand':
             // 300 - 1,8 * (N-mineral 0-60 cm)
-            return 300 - 1.8 * N;
+            return Math.max(300 - 1.8 * N, 0);  // Math.min to prevent negative numbers. Can only add nitrate, not remove it
             break;
         case 'clay':
             // 285 - 1,1 * (N-mineral 0-60 cm)
-            return 285 - 1.1 * N;
+            return Math.max(285 - 1.1 * N, 0);  // Math.min to prevent negative numbers. Can only add nitrate, not remove it
             break;
         default:
             throw new Error("soilType isn't either 'sand' or 'clay'.")
@@ -525,39 +529,35 @@ var calcSoilFormula = function (N) {
 };
 
 var calcOutput = function () {
+    var squareHa = Math.pow(lengthSquare, 2) / 10000;   // area square in ha
 
+    var totalNitrate = 0;   // kg
     var amount_squares = 0;
     for (var x = 0; x < fields.length; x++) {
         for (var y = 0; y < fields[0].length; y++) {
             if (getIsUsed(x, y)) {
                 amount_squares++;
+                totalNitrate += getNitrate(x, y) * squareHa;    // kg/ha * ha -> kg
             }
         }
     }
-    var totalArea = lengthSquare * lengthSquare * amount_squares / 10000; // total hectares
+    var totalArea = Math.pow(lengthSquare, 2) * amount_squares / 10000; // total hectares
     // Calc the offset
-    yieldOffset = calcOffset(totalArea);
-    console.log("yieldOffset: " + yieldOffset);
+    yieldOffset = calcOffset(totalArea);    // offset to be used in formula, has no unit
 
-    var totalNitrate = 0;
-    for (var x = 0; x < fields.length; x++) {
-        for (var y = 0; y < fields[0].length; y++) {
-            if (getIsUsed(x, y)) {
-                amount_squares++;
-                totalNitrate += getNitrate(x, y);
-            }
-        }
-    }
-    var nitrateAvr = totalNitrate / amount_squares;
-    var nitrateGift = calcSoilFormula(nitrateAvr);
-    var totalYieldOld = 0;
-    var totalYieldNew = 0;
+    var nitrateAvr = totalNitrate / amount_squares; // kg/square
+    var nitrateAvrPerHa = nitrateAvr / squareHa; // nitrate per square divided by the area of a square in ha. kg/ha
+    var nitrateGift = calcSoilFormula(nitrateAvrPerHa); // kg/ha
+    var totalYieldOld = 0;  // tonnes
+    var totalYieldNew = 0;  // tonnes
 
     for (var x = 0; x < fields.length; x++) {
         for (var y = 0; y < fields[0].length; y++) {
             if (getIsUsed(x, y)) {
-                totalYieldOld += calcYield(nitrateGift + getNitrate(x, y), yieldOffset);
-                totalYieldNew += calcYield(calcSoilFormula(getNitrate(x, y)) + getNitrate(x, y), yieldOffset);
+                var totalNitratePerHa = nitrateGift + getNitrate(x, y);  // kg/ha + kg/ha
+                totalYieldOld += calcYield(totalNitratePerHa, yieldOffset) * squareHa;  // add (tonne/ha * ha) of a square
+                totalNitratePerHa = calcSoilFormula(getNitrate(x, y)) + getNitrate(x, y); // kg/ha + kg/ha
+                totalYieldNew += calcYield(totalNitratePerHa, yieldOffset) * squareHa;  // add (yield/ha * ha) of a square
             }
         }
     }
@@ -570,8 +570,8 @@ var calcOutput = function () {
     $('#newTotalYield').html(Math.round(totalYieldNew));
     $('#newHaYield').html(Math.round(yieldAvrNew));
 
-    $('#changeTotalYield').html(Math.round(totalYieldOld - totalYieldNew));
-    $('#changeHaYield').html(Math.round(yieldAvrOld - yieldAvrNew));
+    $('#changeTotalYield').html(Math.round(totalYieldNew - totalYieldOld));
+    $('#changeHaYield').html(Math.round(yieldAvrNew - yieldAvrOld));
 };
 
 var storeVariables = function (soil, yieldPrev, nitrateAvr) {
