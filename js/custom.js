@@ -340,15 +340,21 @@ var calcYield = function () {
         throw new Error('not initialized')
     }
     // y = -0,0005x^2 + 0,1976x + 28,414
+    var total = 0;
     var potato_yield = 0;
+    var amount_squares = 0;
     for (var x = 0; x < fields.length; x++) {
         for (var y = 0; y < fields[0].length; y++) {
-            var nitrate = getNitrate(x, y);
-            console.log(nitrate);
-            potato_yield += (-0.0005 * Math.pow(nitrate, 2) + 0.1976 * nitrate + 28.414);
+            if (getIsUsed(x, y)) {
+                amount_squares++;
+                total += getNitrate(x, y);
+            }
         }
     }
-    return potato_yield;
+    var average = total / amount_squares;
+    potato_yield += (-0.0005 * Math.pow(average, 2) + 0.1976 * average + 28.414); // Per hectare
+    var total_area = lengthSquare * lengthSquare * amount_squares / 10000; // Total area in hectare
+    return potato_yield * total_area;
 };
 
 interact('.resize-drag')
