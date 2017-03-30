@@ -34,6 +34,8 @@ $(document).ready(function () {
         if (event.target != $('.inputList.active')[0]) {return}
         setCanvas(canvasShape, fields.length, fields[0].length);
         setCanvas(canvasValues, fields.length, fields[0].length);
+        redrawCanvas(canvasShape);
+        redrawCanvas(canvasValues);
     });
 
 
