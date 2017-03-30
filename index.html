@@ -25,9 +25,36 @@
 </head>
 
 <body>
-	<style>
+	<script>
+		// move me
+		function nextPage(wideInput = false) {
+			var current = $(".inputList.active");
+			$(".inputList.active").next().addClass("active");
+			current.removeClass("active");
 
-	</style>
+			if (wideInput) {
+				$('#inputContainer').attr('style', 'width: 80%;');
+				$('#outputContainer').attr('style', 'width: 20%');
+			}else {
+				$('#inputContainer').attr('style', '');
+				$('#outputContainer').attr('style', '');
+			}
+		}
+
+		function prevPage(wideInput = false) {
+			var current = $(".inputList.active");
+			$(".inputList.active").prev().addClass("active");
+			current.removeClass("active");
+
+			if (wideInput) {
+				$('#inputContainer').attr('style', 'width: 80%;');
+				$('#outputContainer').attr('style', 'width: 20%');
+			}else {
+				$('#inputContainer').attr('style', '');
+				$('#outputContainer').attr('style', '');
+			}
+		}
+	</script>
 	<!-- the left side -->
 	<div id="inputContainer">
 		<div class="card">
@@ -66,7 +93,7 @@
 							</form>
 						</div>
 					</div>
-					<a href="javascript:void(0)" class="btn" onclick=" $(this).parent().removeClass('active'); $(this).parent().next().addClass('active'); $('#inputContainer').attr('style', 'width: 80%;'); $('#outputContainer').attr('style', 'width: 20%'); ">Next</a>
+					<a href="javascript:void(0)" class="btn" onclick="nextPage(true); initialize(parseInt($('#fieldWidth').val()), parseInt($('#fieldHeight').val()), Math.sqrt(parseInt($('#fieldHeight').val())));">Next</a>
 				</div>
 				<div class="inputList">
 					<div id="canvas-container-shape" style="height: 90%; width: 100%">
@@ -76,10 +103,10 @@
 							</div>
 						</div>
 						<canvas id="canvasShape" onclick="canvasClick(canvas='shape',event)"></canvas>
-						<input id="canvasShapeToggle" type="checkbox" checked data-toggle="toggle">
 					</div>
-					<a href="javascript:void(0)" class="btn" onclick="$(this).parent().prev().height('100%'); $('#inputContainer').attr('style', ''); $('#outputContainer').attr('style', '');">Prev</a>
-					<a href="javascript:void(0)" class="btn" id="nextbtn" onclick="$(this).parent().height(0); $('#inputContainer').attr('style', 'width: 80%;'); $('#outputContainer').attr('style', 'width: 20%');">Next</a>
+					<input id="canvasShapeToggle" type="checkbox" checked data-toggle="toggle">
+					<a href="javascript:void(0)" class="btn" onclick="prevPage();">Prev</a>
+					<a href="javascript:void(0)" class="btn" id="nextbtn" onclick="nextPage(true);">Next</a>
 				</div>
 				<div class="inputList">
 					<div id="canvas-container-values" style="height: 90%; width: 100%">
@@ -91,8 +118,8 @@
 						<canvas id="canvasValues" class="inputDialog" onclick="canvasClick(canvas='values',event)"></canvas>
 					</div>
 					<br>
-					<a href="javascript:void(0)" class="btn" onclick="$(this).parent().removeClass('active'); $(this).parent().prev().addClass('active'); $('#inputContainer').attr('style', 'width: 80%;'); $('#outputContainer').attr('style', 'width: 20%');">Prev</a>
-					<a href="javascript:void(0)" class="btn" onclick="$(this).parent().removeClass('active'); $(this).parent().next().addClass('active'); $('#inputContainer').attr('style', ''); $('#outputContainer').attr('style', '');">Next</a>
+					<a href="javascript:void(0)" class="btn" onclick="prevPage(true);">Prev</a>
+					<a href="javascript:void(0)" class="btn" onclick="nextPage();">Next</a>
 				</div>
 				<div class="inputList">
 					<div class="group">
@@ -115,7 +142,7 @@
 							<input id="input3" type="text">
 						</div>
 					</div>
-					<a href="javascript:void(0)" class="btn" onclick="$(this).parent().removeClass('active'); $(this).parent().prev().addClass('active'); $('#inputContainer').attr('style', 'width: 80%;'); $('#outputContainer').attr('style', 'width: 20%');">Prev</a>
+					<a href="javascript:void(0)" class="btn" onclick="prevPage(true);">Prev</a>
 					<a href="javascript:void(0)" class="btn" onclick="startModel()">Go</a>
 				</div>
 			</div>

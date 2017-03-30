@@ -2,8 +2,7 @@
 its a useless potatoe
 
 ## Bugs
-Afbeelding groter dan div is niet handig
+Afbeelding groter dan div is niet handig	--- 'dirty' fix, just overflow hidden
 
 ## TODO
-Verplaatsen afbeelding
-Rename repo?
+Rename repo?								--- naah, it's perfect
