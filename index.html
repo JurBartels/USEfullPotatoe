@@ -50,7 +50,7 @@
 						<div class="inputBox">
 							<label for="squareSize">Square size <span class="unit">(m<sup>2</sup>)</span></label>
 							<br>
-							<input id="squareSize" type="number" min="5" max="10000" step="1" value ="25">
+							<input id="squareSize" type="number" min="5" max="10000" step="1" value ="2500">
 						</div>
 					</div>
 					<div class="group">
@@ -67,7 +67,7 @@
 								<div class="inputBox">
 									<label for="lastYield">Yield last year <span class="unit">(ton/ha)</span></label>
 									<br>
-									<input id="lastYield" type="number" min="5" max="1000" step="1" value ="100">
+									<input id="lastYield" type="number" min="5" max="1000" step="1" value ="40">
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -135,22 +135,22 @@
 		<div class="card">
 			<div id="outputs" class="hide">
 				<div class="group">
-					<h2>Old method</h2>
-					<span id="oldTotalYield"></span> <span class="unit">kg total yield</span>
+					<h2>Without drones</h2>
+					<span id="oldTotalYield"></span> <span class="unit">tons total yield</span>
 					<br>
-					<span id="oldHaYield"></span> <span class="unit">kg/ha yield</span>
+					<span id="oldHaYield"></span> <span class="unit">tons/ha yield</span>
 				</div>
 				<div class="group">
-					<h2>New method</h2>
-					<span id="newTotalYield"></span> <span class="unit">kg total yield</span>
+					<h2>With drones</h2>
+					<span id="newTotalYield"></span> <span class="unit">tons total yield</span>
 					<br>
-					<span id="newHaYield"></span> <span class="unit">kg/ha yield</span>
+					<span id="newHaYield"></span> <span class="unit">tons/ha yield</span>
 				</div>
 				<div class="group">
-					<h2>Change</h2>
-					<span id="changeTotalYield"></span> <span class="unit">kg total yield</span>
+					<h2>Difference in yield</h2>
+					<span id="changeTotalYield"></span> <span class="unit">tons total yield</span>
 					<br>
-					<span id="changeHaYield"></span> <span class="unit">kg/ha yield</span>
+					<span id="changeHaYield"></span> <span class="unit">tons/ha yield</span>
 				</div>
 			</div>
 		</div>

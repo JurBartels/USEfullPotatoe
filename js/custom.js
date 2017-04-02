@@ -504,7 +504,7 @@ var calcOffset = function (area) {
     } else if (nitrateAvrPrevYear == null) {
         throw new Error("nitrateAvrPrevYear isn't defined.")
     }
-    return yieldPrevYear * area - calcYield(nitrateAvrPrevYear, 0) * area;  // correct
+    return yieldPrevYear * area - calcYield(nitrateAvrPrevYear) * area;  // correct
 };
 
 // returns to be added nitrate in kg/ha. expects N to be in kg/ha
@@ -530,7 +530,7 @@ var calcSoilFormula = function (N) {
 
 var calcOutput = function () {
     var squareHa = Math.pow(lengthSquare, 2) / 10000;   // area square in ha
-
+    console.log("squareHa: " + squareHa);
     var totalNitrate = 0;   // kg
     var amount_squares = 0;
     for (var x = 0; x < fields.length; x++) {
@@ -541,13 +541,19 @@ var calcOutput = function () {
             }
         }
     }
+    console.log("totalNitrate: " + totalNitrate);
+    console.log("amount_squares: " + amount_squares);
     var totalArea = Math.pow(lengthSquare, 2) * amount_squares / 10000; // total hectares
+    console.log("totalArea: " + totalArea);
     // Calc the offset
     yieldOffset = calcOffset(totalArea);    // offset to be used in formula, has no unit
-
+    console.log("yieldOffset: " + yieldOffset);
     var nitrateAvr = totalNitrate / amount_squares; // kg/square
+    console.log("nitrateAvr: " + nitrateAvr);
     var nitrateAvrPerHa = nitrateAvr / squareHa; // nitrate per square divided by the area of a square in ha. kg/ha
+    console.log("nitrateAvrPerHa: " + nitrateAvrPerHa);
     var nitrateGift = calcSoilFormula(nitrateAvrPerHa); // kg/ha
+    console.log("nitrateGift: " + nitrateGift);
     var totalYieldOld = 0;  // tonnes
     var totalYieldNew = 0;  // tonnes
 
@@ -555,12 +561,19 @@ var calcOutput = function () {
         for (var y = 0; y < fields[0].length; y++) {
             if (getIsUsed(x, y)) {
                 var totalNitratePerHa = nitrateGift + getNitrate(x, y);  // kg/ha + kg/ha
+                console.log("totalNitratePerHa old for square "+ x + " , " + y +" : "+ totalNitratePerHa);
                 totalYieldOld += calcYield(totalNitratePerHa, yieldOffset) * squareHa;  // add (tonne/ha * ha) of a square
+                console.log("calcyieldOld for square "+ x + " , " + y +" : "+ (calcYield(totalNitratePerHa, yieldOffset) * squareHa));
                 totalNitratePerHa = calcSoilFormula(getNitrate(x, y)) + getNitrate(x, y); // kg/ha + kg/ha
+                console.log("totalNitratePerHa new for square "+ x + " , " + y +" : "+ totalNitratePerHa);
                 totalYieldNew += calcYield(totalNitratePerHa, yieldOffset) * squareHa;  // add (yield/ha * ha) of a square
+                console.log("calcyieldnew for square "+ x + " , " + y +" : "+ (calcYield(totalNitratePerHa, yieldOffset) * squareHa));
             }
         }
     }
+
+    console.log("totalYieldOld: " + totalYieldOld);
+    console.log("totalYieldNew: " + totalYieldNew);
 
     var yieldAvrOld = totalYieldOld / totalArea;
     var yieldAvrNew = totalYieldNew / totalArea;
